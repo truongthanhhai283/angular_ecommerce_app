@@ -25,10 +25,11 @@ import { MaterialModule } from './shared/material/material.module';
 import { AdminModule } from './admin/admin.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilesModule } from './shared/files/files.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,   
+    AppComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
@@ -56,6 +57,7 @@ import { FilesModule } from './shared/files/files.module';
     FormsModule,
     ReactiveFormsModule,
     FilesModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
