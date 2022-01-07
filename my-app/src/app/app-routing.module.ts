@@ -11,6 +11,7 @@ import { OrderComponent } from './components/order/order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserAuthGuard } from './guards/user-auth.guard';
 import { CartResolverService } from './resolvers/cart-resolver.service';
 import { CategoryResolverService } from './resolvers/category-resolver.service';
 import { OrderResolverService } from './resolvers/order-resolver.service';
@@ -29,6 +30,7 @@ const routes: Routes = [
     resolve: {
       profile: ProfileResolverService,
     },
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'order',
@@ -36,6 +38,7 @@ const routes: Routes = [
     resolve: {
       order: OrderResolverService,
     },
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'cart',
@@ -43,6 +46,7 @@ const routes: Routes = [
     resolve: {
       cart: CartResolverService,
     },
+    canActivate: [UserAuthGuard],
   },
   {
     path: 'auth',
@@ -86,6 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'admin', //this is  the prefix route
+    canActivate: [UserAuthGuard],
     // lazy loading: this module will not loaded only if the user navigate into it
     loadChildren: () =>
       import('./admin/admin.module').then((a) => a.AdminModule),

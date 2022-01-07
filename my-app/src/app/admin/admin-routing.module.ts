@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
 import { CategoryResolverService } from '../resolvers/category-resolver.service';
 import { UserResolverService } from '../resolvers/user-resolver.service';
+import { UserAuthGuard } from '../guards/user-auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [UserAuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       {
@@ -20,6 +23,7 @@ const routes: Routes = [
             resolve: {
               categories: CategoryResolverService,
             },
+            canActivate: [UserAuthGuard],
           },
           {
             path: 'manage-users',
@@ -27,6 +31,7 @@ const routes: Routes = [
             resolve: {
               allUsers: UserResolverService,
             },
+            canActivate: [UserAuthGuard],
           },
         ],
       },
