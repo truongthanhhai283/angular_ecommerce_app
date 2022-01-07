@@ -11,7 +11,6 @@ import { CategoryListComponent } from './components/category-list/category-list.
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { OrderComponent } from './components/order/order.component';
-import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -40,7 +39,6 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     CategoryDetailsComponent,
     ContactComponent,
     OrderComponent,
-    ProductComponent,
     ProductDetailsComponent,
     ProfileComponent,
     ProductListComponent,
