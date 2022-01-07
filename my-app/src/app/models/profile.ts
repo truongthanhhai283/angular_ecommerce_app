@@ -8,4 +8,5 @@ export class Profile {
   country: string;
   city: string;
   address: string;
+  cartId: number;
 }

@@ -13,7 +13,7 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
   private errorHandler: ErrorHandler = new ErrorHandler();
 
-  getCategory(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
     try {
       return this.http.get<Category[]>(this.categoryUrl);
     } catch (error) {
