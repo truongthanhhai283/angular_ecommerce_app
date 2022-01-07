@@ -17,7 +17,6 @@
 -   contact component
 -   home component
 -   order component
--   product component
 -   product-list component
 -   product-details component
 -   profile component
