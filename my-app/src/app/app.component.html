@@ -13,37 +13,47 @@
       <button mat-icon-button>
         <mat-icon>menu</mat-icon>
       </button>
-      <a mat-button style="font-family: 'Anton', sans-serif">TTH Website</a>
+      <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/home" routerLinkActive="active">TTH
+        Website</a>
       <div class="col-md-7 justify-content-start">
 
-        <a mat-button style="font-family: 'Anton', sans-serif"> Contact Us <i class="fa fa-mail-forward"></i> </a>
-        <a mat-button style="font-family: 'Anton', sans-serif"> Products </a>
-
+        <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/contact" routerLinkActive="active"> Contact
+          Us <i class="fa fa-mail-forward"></i> </a>
+        <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/products" routerLinkActive="active"> Products
+        </a>
       </div>
 
       <div class="col-md-5 justify-content-end">
-        <a style="font-family: 'Anton', sans-serif" mat-button>Login <i class="fas fa-sign-in-alt"></i></a>
-        <a style="font-family: 'Anton', sans-serif" mat-button>Register <i class="far fa-user-circle"></i>
+        <a style="font-family: 'Anton', sans-serif" mat-button routerLink="/auth/login" routerLinkActive="active"
+          *ngIf="!authService.isLoggedIn()">Login
+          <i class="fas fa-sign-in-alt"></i></a>
+        <a style="font-family: 'Anton', sans-serif" mat-button routerLink="/auth/register" routerLinkActive="active"
+          *ngIf="!authService.isLoggedIn()">Register <i class="far fa-user-circle"></i>
         </a>
-        <a style="font-family: 'Anton', sans-serif" mat-button [matMenuTriggerFor]="managementMenu">
+        <a style="font-family: 'Anton', sans-serif"
+          *ngIf="authService.isLoggedIn() && (authService.currentUser && authService.currentUser.isAdmin)"
+          routerLinkActive="active" mat-button [matMenuTriggerFor]="managementMenu">
           Management
         </a>
         <mat-menu #managementMenu="matMenu">
           <a mat-menu-item>Dashboard</a>
           <a mat-menu-item>M-Categories</a>
-          <a mat-menu-item>M-Users</a>
+          <a mat-menu-item *ngIf="authService.isLoggedIn() && authService.currentUser">M-Users</a>
         </mat-menu>
 
-        <a mat-button style="font-family: 'Anton', sans-serif" [matMenuTriggerFor]="userMenu">UserName</a>
+        <a mat-button style="font-family: 'Anton', sans-serif"
+          [matMenuTriggerFor]="userMenu">{{authService.username}}</a>
 
-        <a mat-button style="font-family: 'Anton', sans-serif; font-size: 23px">
+        <a mat-button style="font-family: 'Anton', sans-serif; font-size: 23px"
+          *ngIf="authService.isLoggedIn() && (authService.cart && authService.currentUser)" routerLink="/cart"
+          routerLinkActive="active">
           <i style="font-size: 23px" class="fas fa-cart-plus" [matBadge]="2" matBadgeOverlap="false"
             matBadgePosition="above after" matBadgeSize="medium" matBadgeColor="warn"></i>
         </a>
         <mat-menu #userMenu="matMenu">
           <a mat-menu-item>Profile</a>
           <a mat-menu-item>Orders</a>
-          <a mat-menu-item style="cursor: pointer;">
+          <a mat-menu-item style="cursor: pointer;" *ngIf="authService.isLoggedIn()" (click)="authService.userLogout()">
             <i class="fa fa-sign-out-alt"></i>
             Logout
           </a>

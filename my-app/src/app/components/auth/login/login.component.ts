@@ -31,7 +31,11 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private alertService: AlertService,
     private modalService: BsModalService
-  ) {}
+  ) {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   ngOnInit(): void {
     this.authCredentialsDto = this.fb.group({
