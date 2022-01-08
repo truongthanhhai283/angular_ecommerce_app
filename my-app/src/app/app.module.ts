@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {
+  ModalModule,
+  BsModalRef
+} from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,6 +62,7 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     ReactiveFormsModule,
     FilesModule,
     HttpClientModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     {
@@ -70,6 +75,7 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
       useClass: ErrorInterceptorService,
       multi: true,
     },
+    BsModalRef
   ],
   bootstrap: [AppComponent],
 })

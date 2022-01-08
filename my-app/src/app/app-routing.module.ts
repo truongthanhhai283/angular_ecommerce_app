@@ -11,6 +11,7 @@ import { OrderComponent } from './components/order/order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { UserAuthGuard } from './guards/user-auth.guard';
 import { CartResolverService } from './resolvers/cart-resolver.service';
 import { CategoryResolverService } from './resolvers/category-resolver.service';
@@ -90,7 +91,7 @@ const routes: Routes = [
   },
   {
     path: 'admin', //this is  the prefix route
-    canActivate: [UserAuthGuard],
+    canActivate: [AdminAuthGuard],
     // lazy loading: this module will not loaded only if the user navigate into it
     loadChildren: () =>
       import('./admin/admin.module').then((a) => a.AdminModule),
