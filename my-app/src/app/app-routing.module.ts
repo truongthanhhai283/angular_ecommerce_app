@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { CartComponent } from './components/cart/cart.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { OrderComponent } from './components/order/order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: 'categories/:id',
     component: CategoryDetailsComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
   {
     path: '',
