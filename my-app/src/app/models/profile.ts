@@ -1,7 +1,7 @@
 export class Profile {
   id: number;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   gender: string;
   age: string;
@@ -9,4 +9,6 @@ export class Profile {
   city: string;
   address: string;
   cartId: number;
+  phone: string;
+  image: string;
 }

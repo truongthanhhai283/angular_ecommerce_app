@@ -29,10 +29,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    resolve: {
-      profile: ProfileResolverService,
-    },
-    canActivate: [UserAuthGuard],
+    // resolve: {
+    //   profile: ProfileResolverService,
+    // },
+    // canActivate: [UserAuthGuard],
   },
   {
     path: 'order',
