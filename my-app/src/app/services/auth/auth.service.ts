@@ -132,4 +132,20 @@ export class AuthService {
       this.errorHandler.handleError(err);
     }
   }
+
+  addProfileImage(imageForm): Observable<Profile> {
+    try {
+      return this.http.post<Profile>(this.newImageUrl, imageForm);
+    } catch (err) {
+      this.errorHandler.handleError(err);
+    }
+  }
+
+  changeProfileImage(imageForm): Observable<Profile> {
+    try {
+      return this.http.patch<Profile>(this.imageChangeUrl, imageForm);
+    } catch (err) {
+      this.errorHandler.handleError(err);
+    }
+  }
 }
