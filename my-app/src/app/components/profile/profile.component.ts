@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileUploader } from 'ng2-file-upload';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Profile } from 'src/app/models/profile';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -12,6 +13,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class ProfileComponent implements OnInit {
   profile: Profile;
   modalRef: BsModalRef;
+  public uploader: FileUploader = new FileUploader({});
+  formData: FormData = new FormData();
+  selectedFile: string = null;
 
   constructor(
     private authService: AuthService,
@@ -60,4 +64,30 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0] as File;
+      this.selectedFile = file.name;
+      this.formData.set('image', file);
+    }
+  }
+
+  uploadingNewPicture() {
+    this.authService.addProfileImage(this.formData).subscribe((res) => {
+      this.profile = res;
+      this.formData.delete('image');
+      this.selectedFile = null;
+      alert('Profile uploaded successfully');
+    });
+  }
+
+  changingExistPicture() {
+    this.authService.changeProfileImage(this.formData).subscribe((res) => {
+      this.profile = res;
+      this.formData.delete('image');
+      this.selectedFile = null;
+      alert('profile image changed successfully');
+    });
+  }
 }
