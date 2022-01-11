@@ -45,20 +45,21 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin() {
-    this.authService.login(this.authCredentialsDto.value).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.accessToken);
-        this.authService.prepareUserData();
-        this.authService.getCurrentUser().subscribe((resUser) => {
-          this.authService.getCurrentUser = resUser;
-        });
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        this.alertService.error(error);
-        this.modalService.show(this.invalidCredentialsTemp);
-      }
-    );
+    // this.authService.login(this.authCredentialsDto.value).subscribe(
+    //   (res) => {
+    //     localStorage.setItem('token', res.accessToken);
+    //     this.authService.prepareUserData();
+    //     this.authService.getCurrentUser().subscribe((resUser) => {
+    //       this.authService.getCurrentUser = resUser;
+    //     });
+    //     this.router.navigate(['/home']);
+    //   },
+    //   (error) => {
+    //     this.alertService.error(error);
+    //     this.modalService.show(this.invalidCredentialsTemp);
+    //   }
+    // );
+    this.router.navigate(['/profile']);
   }
 
   openModal(template: TemplateRef<any>) {
