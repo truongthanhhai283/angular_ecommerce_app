@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from './models/category';
 import { AuthService } from './services/auth/auth.service';
+import { CategoryService } from './services/category/category.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +10,26 @@ import { AuthService } from './services/auth/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Ecommerce App';
-
+  categories: Category[];
   /**
    *
    */
-  constructor(public authService: AuthService) {
+  constructor(
+    public authService: AuthService,
+    private categoryService: CategoryService
+  ) {
     authService.prepareUserData();
+    this.prepareCategory();
   }
+
+  prepareCategory() {
+    this.categoryService.getCategories().subscribe((res) => {
+      this.categories = res;
+    });
+  }
+
   ngOnInit(): void {
     this.authService.prepareUserData();
+    this.prepareCategory();
   }
 }
