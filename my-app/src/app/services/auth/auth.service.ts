@@ -43,7 +43,7 @@ export class AuthService {
     if (this.isLoggedIn()) {
       this.prepareUserData().subscribe((uData: UserData) => {
         this.profile = uData.profile;
-        this.username = `${uData.profile.firstName} ${uData.profile.lastName}`;
+        this.username = `${uData.profile.firstname} ${uData.profile.lastname}`;
         this.cartItem = uData.cartItem;
         this.cart = uData.cart;
       });
@@ -109,6 +109,25 @@ export class AuthService {
   getUserProfile(): Observable<Profile> {
     try {
       return this.http.get<Profile>(this._profileUrl);
+    } catch (err) {
+      this.errorHandler.handleError(err);
+    }
+  }
+
+  updateProfile(updateForm): Observable<Profile> {
+    try {
+      return this.http.put<Profile>(
+        `${this._profileUrl}/userprofile/edit`,
+        updateForm
+      );
+    } catch (error) {
+      this.errorHandler.handleError(error);
+    }
+  }
+
+  uploadProfileImage(imageForm): Observable<Profile> {
+    try {
+      return this.http.patch<Profile>(this.imageChangeUrl, imageForm);
     } catch (err) {
       this.errorHandler.handleError(err);
     }
