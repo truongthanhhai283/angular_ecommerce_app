@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ErrorHandler } from 'src/app/shared/error-handler';
@@ -9,7 +10,7 @@ import { ErrorHandler } from 'src/app/shared/error-handler';
 })
 export class ProductService {
   private url = `http://localhost:3000/products`;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   private errorHandler: ErrorHandler = new ErrorHandler();
 
   getProducts(): Promise<Product[]> {
@@ -61,5 +62,13 @@ export class ProductService {
     } catch (error) {
       this.errorHandler.handleError(error);
     }
+  }
+
+  viewProductDetails(product: Product) {
+    this.router.navigate(['/products', product.id], {
+      queryParams: {
+        Name: product.name,
+      },
+    });
   }
 }
