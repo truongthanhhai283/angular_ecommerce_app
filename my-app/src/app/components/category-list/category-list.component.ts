@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category/category.service';
 
@@ -14,7 +14,8 @@ export class CategoryListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {
     if (this.route.snapshot.data.categories) {
       this.categories = this.route.snapshot.data.categories;
@@ -22,4 +23,12 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  viewCategoryDetails(category: Category) {
+    this.router.navigate(['/categories', category.id], {
+      queryParams: {
+        Name: category.name,
+      },
+    });
+  }
 }
